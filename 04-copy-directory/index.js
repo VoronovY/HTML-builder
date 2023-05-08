@@ -7,10 +7,6 @@ const copyFileName = "files-copy";
 const filesPath = path.join(__dirname, originalFileName);
 const copyFilesPath = path.join(__dirname, copyFileName);
 
-fs.mkdir(copyFilesPath, { recursive: true }, (err) => {
-  if (err) throw err;
-});
-
 const helper = (pathToFile) => {
   const curPath = path.join(filesPath, ...pathToFile);
   const copyPath = path.join(copyFilesPath, ...pathToFile);
@@ -37,4 +33,9 @@ const helper = (pathToFile) => {
   });
 };
 
-helper([]);
+fs.rm(copyFilesPath, { recursive: true, force: true }, () => {
+  fs.mkdir(copyFilesPath, { recursive: true }, (err) => {
+    if (err) throw err;
+    helper([]);
+  });
+});
