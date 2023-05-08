@@ -10,7 +10,7 @@ async function run() {
   process.stdin.on("data", (data) => {
     const text = data.toString();
     if (text.trim() === "exit") {
-      process.stdout.write("Bye, see you later");
+      process.stdout.write("Bye, see you later\n");
       process.exit();
     }
 
@@ -20,7 +20,7 @@ async function run() {
   });
 
   process.on("SIGINT", () => {
-    process.stdout.write("\nBye, see you later");
+    process.stdout.write("\nBye, see you later\n");
     process.exit();
   });
 }
